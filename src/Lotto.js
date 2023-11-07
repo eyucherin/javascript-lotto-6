@@ -1,3 +1,5 @@
+import { Random } from "@woowacourse/mission-utils";
+import { CONSTANT,ERROR_MESSAGE } from "./Constants";
 class Lotto {
   #numbers;
 
@@ -7,12 +9,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (!Array.isArray(numbers) || numbers.length !== 6) {
+      throw new Error(ERROR_MESSAGE.ERROR_MSG_DUPLICATE_NUMBER);
     }
+    const numberSet = new Set(numbers);
+    if (numberSet.size !== numbers.length) {
+      throw new Error(ERROR_MESSAGE.ERROR_MSG_DUPLICATE_NUMBER);
+    }
+    numberSet.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error(ERROR_MESSAGE.ERROR_MSG_NUMBER_OUT_OF_RANGE);
+      }
+    });
   }
 
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
