@@ -23,6 +23,14 @@ class Lotto {
     });
   }
 
+  static generateRandomNumbers(){
+    const numbers = new Set();
+    while(numbers.size < CONSTANT.LOTTO_NUMBER_COUNT){
+      numbers.add(Random.pickNumberInRange(CONSTANT.MIN_LOTTO_NUMBER,CONSTANT.MAX_LOTTO_NUMBER))
+    };
+    return[...numbers];
+  }
+
 }
 
 export default Lotto;
